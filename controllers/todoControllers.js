@@ -2,8 +2,12 @@ const Todo = require("../models/Todo");
 
 // GET all todos
 const getTodos = async (req, res) => {
-  const todos = await Todo.find().sort({ createdAt: -1 });
-  res.json(todos);
+  try {
+    const todos = await Todo.find().sort({ createdAt: -1 });
+    res.json(todos);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
 // CREATE todo
