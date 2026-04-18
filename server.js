@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
 });
 
 // Routes
-app.use("/todos", todoRoutes);
+app.use("/api/todos", todoRoutes);
 
 // Start server
 app.listen(PORT, "0.0.0.0", () => {
