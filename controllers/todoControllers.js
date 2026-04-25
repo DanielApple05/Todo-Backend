@@ -3,10 +3,10 @@ const Todo = require("../models/Todo");
 // GET all todos
 const getTodos = async (req, res) => {
   try {
-    const todos = await Todo.find().sort({ createdAt: -1 });
+    const todos = await Todo.find({ user: req.user }).sort({ createdAt: -1 });
     res.json(todos);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ message: error.message }); 
   }
 };
 
@@ -15,6 +15,7 @@ const createTodo = async (req, res) => {
   try {
     const todo = await Todo.create({
       text: req.body.text,
+      user: req.user, // from authMiddleware
     });
 
     res.status(201).json(todo);
