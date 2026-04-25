@@ -6,6 +6,6 @@ const protect = require("../middleware/authMiddleware");
 // Define routes
 router.get("/", protect, getTodos);         // GET
 router.post("/", protect, createTodo);        // POST
-router.delete("/:_id", deleteTodo); // DELETE
-router.patch("/:_id", toggleTodo); // PATCH 
+router.delete("/:_id", protect, deleteTodo); // DELETE
+router.patch("/:_id", protect, toggleTodo); // PATCH 
 module.exports = router;

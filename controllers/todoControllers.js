@@ -27,7 +27,15 @@ const createTodo = async (req, res) => {
 // DELETE todo
 const deleteTodo = async (req, res) => {
   try {
-    await Todo.findByIdAndDelete(req.params._id);
+  const todo = await Todo.findById(req.params._id);
+    if (!todo) {
+      return res.status(404).json({ message: "Todo not found" });
+    }
+    if (todo.user.toString() !== req.user) {
+      return res.status(403).json({ message: "Unauthorized" });
+    }
+    await todo.deleteOne();
+
     res.json({ message: "Todo deleted" });
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -37,12 +45,19 @@ const deleteTodo = async (req, res) => {
 // TOGGLE todo
 const toggleTodo = async (req, res) => {
   try {
-    const todo = await Todo.findById(req.params._id);
 
+    const todo = await Todo.findById(req.params.id);
+    if (!todo) {
+      return res.status(404).json({ message: "Todo not found" });
+    }
+    //Check ownership
+    if (todo.user.toString() !== req.user) {
+      return res.status(403).json({ message: "Unauthorized" });
+    }
+    //toggle completed
     todo.isComplete = !todo.isComplete;
-    await todo.save();
-
-    res.json(todo);
+    const updatedTodo = await todo.save();
+    res.json(updatedTodo);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
