@@ -4,7 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const todoRoutes = require("./routes/todos");
-
+const signUpRoutes = require("./routes/signUpRoutes");
 const app = express();
 const PORT = process.env.PORT;
 
@@ -24,6 +24,7 @@ app.get("/", (req, res) => {
 
 // Routes
 app.use("/api/todos", todoRoutes);
+app.use("/api/auth", signUpRoutes);
 
 // Start server
 app.listen(PORT, "0.0.0.0", () => {
