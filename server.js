@@ -4,7 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const todoRoutes = require("./routes/todos");
-const signUpRoutes = require("./routes/signUpRoutes");
+const signUpRoutes = require("./routes/authRoutes");
 const app = express();
 const PORT = process.env.PORT;
 
