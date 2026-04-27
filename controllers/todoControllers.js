@@ -27,7 +27,7 @@ const createTodo = async (req, res) => {
 // DELETE todo
 const deleteTodo = async (req, res) => {
   try {
-  const todo = await Todo.findById(req.params._id);
+  const todo = await Todo.findById(req.params.id);
     if (!todo) {
       return res.status(404).json({ message: "Todo not found" });
     }
@@ -46,7 +46,7 @@ const deleteTodo = async (req, res) => {
 const toggleTodo = async (req, res) => {
   try {
 
-    const todo = await Todo.findById(req.params._id);
+    const todo = await Todo.findById(req.params.id);
     if (!todo) {
       return res.status(404).json({ message: "Todo not found" });
     }
