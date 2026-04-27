@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { getTodos, createTodo, deleteTodo, toggleTodo } = require("../controllers/todoControllers");
-const protect = require("../middleware/authMiddleware");
+const protect = require("../Middleware/authMiddleware");
 
 // Define routes
 router.get("/", protect, getTodos);         // GET
