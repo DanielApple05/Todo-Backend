@@ -42,12 +42,12 @@ const Login = async (req, res) => {
  // Check if user exists
  const user = await User.findOne({ email });
  if (!user) { 
-  return res.status(400).json({ message: "Invalid credentials" });
+  return res.status(400).json({ message: "user not found, please sign up" });
  }
   // Check Password
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) {
-    return res.status(400).json({ message: "Invalid credentials" });
+    return res.status(400).json({ message: "Wrong Password" });
   }
   // Generate Token
   const token = jwt.sign(
